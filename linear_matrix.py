@@ -66,10 +66,13 @@ class Coder(pixelstrip.Animation):
                     self.yPos[stuff] = self.yPos[stuff] - 1
             self.timeout = 0.1
             strip.show()
-strip = pixelstrip.PixelStrip(board.D12, 24, bpp=4, pixel_order=pixelstrip.GRB)
-strip.timeout = 0.7
 
-strip.animation = Coder()
 
-while True:
-    strip.draw()
+if __name__ == "__main__":
+    strip = pixelstrip.PixelStrip(board.D12, 24, bpp=4, pixel_order=pixelstrip.GRB)
+    strip.timeout = 0.7
+
+    strip.animation = Coder()
+
+    while True:
+        strip.draw()
