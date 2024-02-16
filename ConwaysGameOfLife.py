@@ -1,3 +1,4 @@
+# Made by CalSch
 import pixelstrip
 import board 
 from colors import *
