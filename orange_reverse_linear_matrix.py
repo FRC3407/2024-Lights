@@ -25,6 +25,7 @@ class Coder(pixelstrip.Animation):
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():
+            strip.fill(0)
             for i in range(strip.n/20):
                 self.yPos.append(random.randrange(0, strip.n))
                 self.length.append(random.randrange(1, strip.n))
