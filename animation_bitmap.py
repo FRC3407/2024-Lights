@@ -6,6 +6,7 @@ import bmp
 
 class BitmapAnimation(pixelstrip.Animation):
     def __init__(self, file_names, cycle_time=1.0, flip=None):
+        # CHange the flip value if the image is backwards
         pixelstrip.Animation.__init__(self)
         self.cycle_time = cycle_time
         self.file_names = file_names
@@ -40,7 +41,7 @@ class BitmapAnimation(pixelstrip.Animation):
                         strip[x, yy] = bitmap[x, y]
                 
 def main():
-    matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
+    matrix = pixelstrip.PixelStrip(board.GP15, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_ZIGZAG, pixelstrip.MATRIX_COLUMN_MAJOR})
     matrix.animation = BitmapAnimation(['test1_8x8.bmp', 'test2_8x8.bmp'])
     while True:
         matrix.draw()
