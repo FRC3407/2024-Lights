@@ -10,16 +10,28 @@ With all the resources and stuff
 * backlights - rings on the intake side of the robot
 
 # What Light Do?
-* signal direction
-* signal wanting of piece
-* police
-* shooting signal
-* blue screen of death
-* general purpose lighting
-* speakers
-* April tag pointer
-* text
-* "echo" FMS sounds with lights
-* brownout
-* A-stop / E - stop
-* score doarb
+
+# disabled
+* All exept big P - matrix
+* big P - conway's game of life
+  
+# teleop
+* headlights - white lights
+* backlights - red lights
+* perimeter - green lights
+* big P - eyes
+* side lights - green
+
+# during intake 
+* headlights - spinning
+* backlights - spinning
+* perimeter - spinning
+* big P - upside down orange version of the matrix
+* side lights - upside down orange version of the matrix
+
+# during flinging 
+* headlights - spinning then flash white
+* backlights - spinning then flash white
+* perimeter - flash white
+* big P - orange dot bouncing
+* side lights - faster upside down version of the matrix
