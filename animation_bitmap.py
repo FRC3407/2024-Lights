@@ -6,6 +6,7 @@ import bmp
 
 class BitmapAnimation(pixelstrip.Animation):
     def __init__(self, file_names, cycle_time=1.0, flip=None):
+        # CHange the flip value if the image is backwards
         pixelstrip.Animation.__init__(self)
         self.cycle_time = cycle_time
         self.file_names = file_names

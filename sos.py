@@ -37,26 +37,21 @@ class StripeAnimation(pixelstrip.Animation):
 
     def reset(self, matrix):
         self.timeout = 0.0
-    
-    def fill(self, r, g, b):
-        for i in range(matrix.width):
-            for o in range(matrix.height):
-                matrix[i, o] = (r, g, b, 0)
 
     def draw(self, matrix, delta_time):
         if self.is_timed_out():
             state = self.states[self.s]
-            print(self.s)
 
             if state.light_on:
-                self.fill(255, 255, 255)
+                matrix.fill(WHITE)
             else:
                 matrix.clear()
             matrix.show()
             self.s = state.next_state
             self.timeout = state.timeout
 
-matrix = pixelstrip.PixelStrip(board.GP15, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_ZIGZAG, pixelstrip.MATRIX_COLUMN_MAJOR})
-matrix.animation = StripeAnimation()
-while True:
-    matrix.draw()
+if __name__ == "__main__":
+    matrix = pixelstrip.PixelStrip(board.GP15, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_ZIGZAG, pixelstrip.MATRIX_COLUMN_MAJOR})
+    matrix.animation = StripeAnimation()
+    while True:
+        matrix.draw()
