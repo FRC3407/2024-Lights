@@ -3,7 +3,6 @@ import board
 from colors import *
 
 
-
 class BlueScreen(pixelstrip.Animation):
     def __init__(self):
         pixelstrip.Animation.__init__(self)
@@ -16,7 +15,9 @@ class BlueScreen(pixelstrip.Animation):
             matrix.fill((0, 0, 255))
             matrix.show()
 
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_ZIGZAG, pixelstrip.MATRIX_COLUMN_MAJOR})
-matrix.animation = BlueScreen()
-while True:
-    matrix.draw()
+
+if __name__ == "__main__":
+    matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_ZIGZAG, pixelstrip.MATRIX_COLUMN_MAJOR})
+    matrix.animation = BlueScreen()
+    while True:
+        matrix.draw()

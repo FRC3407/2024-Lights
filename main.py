@@ -32,8 +32,8 @@ def receive_message():
     message = i2c.request()
     if message:
         b = message.read(n=1)[0]
-        strip_num = int((b & 0xF0) >> 4)
-        anim_num = int(b & 0x0F)
+        strip_num = int((b & 0xE0) >> 5)
+        anim_num = int(b & 0x1F)
         return (strip_num, anim_num)
     else:
         return None

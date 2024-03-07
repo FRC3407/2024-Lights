@@ -72,10 +72,12 @@ class Coder(pixelstrip.Animation):
             self.timeout = 0.1
             matrix.show()
 
-matrix = pixelstrip.PixelStrip(board.D12, width=32, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
-matrix.timeout = 0.7
 
-matrix.animation = Coder()
+if __name__ == "__main__":
+    matrix = pixelstrip.PixelStrip(board.D12, width=32, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
+    matrix.timeout = 0.7
 
-while True:
-    matrix.draw()
+    matrix.animation = Coder()
+
+    while True:
+        matrix.draw()
