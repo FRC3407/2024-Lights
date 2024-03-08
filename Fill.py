@@ -5,9 +5,9 @@ import math
 import random
 
 
-class FillGreen(pixelstrip.Animation):
-    def __init__(self):
-        strip.fill((0, 255, 0))
+class Fill(pixelstrip.Animation):
+    def __init__(self, color):
+        strip.fill(color)
     def reset(self, strip):
         self.timeout = 0.0
 
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
     strip.timeout = 0.7
 
-    strip.animation = FillGreen()
+    strip.animation = Fill(color= (0, 255, 0))
 
     while True:
         strip.draw()
