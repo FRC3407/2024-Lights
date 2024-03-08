@@ -17,7 +17,7 @@ class ReverseOrangeCoder(pixelstrip.Animation):
                         matrix[x, y-i] = (0, 0, 0, 0)
                     else:
                         matrix[x, y-i] = (255, 30, 0, 0)
-    def __init__(self):
+    def __init__(self, cycle_time):
         self.xPos = []
         self.yPos = []
         self.length = []
@@ -25,6 +25,7 @@ class ReverseOrangeCoder(pixelstrip.Animation):
         self.xPos.append(random.randrange(0, matrix.width-1))
         self.yPos.append(random.randrange(0, matrix.height+7))
         self.length.append(random.randrange(0, 7))
+        self.time = cycle_time
     def reset(self, matrix):
         self.timeout = 0.0
 
@@ -39,14 +40,14 @@ class ReverseOrangeCoder(pixelstrip.Animation):
                 if self.yPos[stuff] >= 0:
                     self.line(self.xPos[stuff], self.yPos[stuff], self.length[stuff])
                     self.yPos[stuff] = self.yPos[stuff] + 1
-            self.timeout = 0.1
+            self.timeout = self.time
             matrix.show()
 
 if __name__ == "__main__":
     matrix = pixelstrip.PixelStrip(board.D12, width=32, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
     matrix.timeout = 0.7
 
-    matrix.animation = ReverseOrangeCoder()
+    matrix.animation = ReverseOrangeCoder(cycle_time=0.1)
 
     while True:
         matrix.draw()
