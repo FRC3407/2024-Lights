@@ -13,25 +13,25 @@ With all the resources and stuff
 
 # disabled
 * All exept big P - matrix.py / linear_matrix.py
-* big P - ConwaysGameOfLife.py
+* big P - conways_game_of_life.py
   
 # teleop
-* headlights - white lights
-* backlights - red lights
-* perimeter - green lights
+* headlights - fill_white.py
+* backlights - fill_red.py
+* perimeter - fill_green.py
 * big P - eyes
-* side lights - green
+* side lights - fill_green.py
 
 # during intake 
-* headlights - CircleSpinner.py
-* backlights - CircleSpinner.py
-* perimeter - CircleSpinner.py
+* headlights - circle_spinner.py
+* backlights - circle_spinner.py
+* perimeter - circle_spinner.py
 * big P - orange_reverse_matrix.py
 * side lights - orange_reverse_matrix.py
 
 # during flinging 
-* headlights - spinning then flash white
-* backlights - spinning then flash white
-* perimeter - flash white
-* big P - orange dot bouncing
+* headlights - spin_flash.py
+* backlights - spin_flash.py
+* perimeter - spin_flash.py
+* big P - orange_reverse_matrix.py
 * side lights - faster upside down version of the matrix
