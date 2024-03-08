@@ -23,9 +23,9 @@ With all the resources and stuff
 * side lights - green
 
 # during intake 
-* headlights - spinning
-* backlights - spinning
-* perimeter - spinning
+* headlights - CircleSpinner.py
+* backlights - CircleSpinner.py
+* perimeter - CircleSpinner.py
 * big P - orange_reverse_matrix.py
 * side lights - orange_reverse_matrix.py
 
