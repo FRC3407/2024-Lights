@@ -16,11 +16,11 @@ With all the resources and stuff
 * big P - conways_game_of_life.py
   
 # teleop
-* headlights - fill_white.py
-* backlights - fill_red.py
-* perimeter - fill_green.py
+* headlights - fill.py
+* backlights - fill.py
+* perimeter - fill.py
 * big P - eyes
-* side lights - fill_green.py
+* side lights - fill.py
 
 # during intake 
 * headlights - circle_spinner.py
