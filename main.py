@@ -1,5 +1,6 @@
 import digitalio
 import board
+from circle_spinner import 
 from i2ctarget import I2CTarget
 from pixelstrip import PixelStrip, current_time
 from animation_pulse import PulseAnimation
@@ -9,15 +10,16 @@ BRIGHTNESS = 0.5
 
 # List of Animations
 animation = [
-    PulseAnimation(),
-    PulseAnimation([(0, 136, 0, 0), (64, 64, 0, 0)]),
-    PulseAnimation([(0, 0, 136, 0), (0, 64, 64, 0)]),
+    
 ]
 
 # List of PixelStrips
 strip = [
-    PixelStrip(board.GP4, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
-    PixelStrip(board.GP5, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS)
+    PixelStrip(board.NEOPIXEL0, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL1, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL3, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL4, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL5, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS)
 ]
 
 # The built-in LED will turn on for half a second after every message
