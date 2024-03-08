@@ -14,12 +14,13 @@ class Coder(pixelstrip.Animation):
                         strip[y-i] = (0, 0, 0, 0)
                     else: 
                         strip[y-i] = (255, 30, 0 ,0)
-    def __init__(self):
+    def __init__(self, cycle_time):
         self.yPos = []
         self.length = []
         self.timeout = 0.0
         self.yPos.append(random.randrange(0, strip.n+7))
         self.length.append(random.randrange(0, 7))
+        self.time = cycle_time
     def reset(self, strip):
         self.timeout = 0.0
 
@@ -33,7 +34,7 @@ class Coder(pixelstrip.Animation):
                 if self.yPos[stuff] >= 0:
                     self.line(self.yPos[stuff], self.length[stuff])
                     self.yPos[stuff] = self.yPos[stuff] + 1
-            self.timeout = 0.01
+            self.timeout = self.time
             strip.show()
 
 
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
     strip.timeout = 0.7
 
-    strip.animation = Coder()
+    strip.animation = Coder(cycle_time=0.1)
 
     while True:
         strip.draw()
