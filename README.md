@@ -12,8 +12,8 @@ With all the resources and stuff
 # What Light Do?
 
 # disabled
-* All exept big P - matrix
-* big P - conway's game of life
+* All exept big P - matrix.py / linear_matrix.py
+* big P - ConwaysGameOfLife.py
   
 # teleop
 * headlights - white lights
@@ -26,8 +26,8 @@ With all the resources and stuff
 * headlights - spinning
 * backlights - spinning
 * perimeter - spinning
-* big P - upside down orange version of the matrix
-* side lights - upside down orange version of the matrix
+* big P - orange_reverse_matrix.py
+* side lights - orange_reverse_matrix.py
 
 # during flinging 
 * headlights - spinning then flash white
