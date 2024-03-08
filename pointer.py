@@ -30,12 +30,12 @@ class Pointing(pixelstrip.Animation):
             self.xth = i*math.cos(direction)+matrix.width/2
             self.yth = matrix.height/2 + i*math.sin(direction)
             if self.xth < matrix.width and self.xth > 0 and self.yth < matrix.height and self.yth > 0:
-                matrix[int(self.xth), int(self.yth)] = (0, 0, 255, 0)
+                matrix[int(self.xth), int(self.yth)] = (255, 30, 0 ,0)
                 for o in range(1, i):
                     if self.xth+o < matrix.width and self.xth + o > 0 and self.yth < matrix.height and self.yth > 0:
-                        matrix[int(self.xth+o), int(self.yth)] = (0, 0, 255, 0)
+                        matrix[int(self.xth+o), int(self.yth)] = (255, 30, 0 ,0)
                     if self.xth < matrix.width and self.xth + o > 0 and self.yth + o < matrix.height and self.yth > 0:
-                        matrix[int(self.xth), int(self.yth + o)] = (0, 0, 255, 0)
+                        matrix[int(self.xth), int(self.yth + o)] = (255, 30, 0 ,0)
 
 
 
