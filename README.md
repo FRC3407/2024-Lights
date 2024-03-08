@@ -34,4 +34,4 @@ With all the resources and stuff
 * backlights - spin_flash.py
 * perimeter - spin_flash.py
 * big P - orange_reverse_matrix.py
-* side lights - faster upside down version of the matrix
+* side lights - orange_reverse_linear_matrix.py
