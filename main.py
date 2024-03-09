@@ -1,25 +1,32 @@
 import digitalio
 import board
-from circle_spinner import CircleSpinner
 from i2ctarget import I2CTarget
 from pixelstrip import PixelStrip, current_time
-from animation_pulse import PulseAnimation
 from colors import *
+from circle_spinner import CircleSpinner
+from animation_pulse import PulseAnimation
+from fill import Fill
 
 I2C_ADDRESS = 0x41
 BRIGHTNESS = 0.5
 
 # List of Animations
 animation = [
-    
+    PulseAnimation(),
+    PulseAnimation(color_list=[RED, BLUE]),
+    PulseAnimation(color_list=[PURPLE, WHITE, YELLOW]),
+    Fill(GREEN),
+    Fill(ORANGE),
+    CircleSpinner(),
+    CircleSpinner(BLUE, cycle_time=0.05)
 ]
 
 # List of PixelStrips
 strip = [
     PixelStrip(board.NEOPIXEL0, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
     PixelStrip(board.NEOPIXEL1, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL2, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL3, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL2, 12, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL3, 12, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
     PixelStrip(board.NEOPIXEL4, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS)
 ]
 

@@ -7,13 +7,16 @@ import random
 
 class Fill(pixelstrip.Animation):
     def __init__(self, color):
-        strip.fill(color)
+        self.color = color
+        
     def reset(self, strip):
         self.timeout = 0.0
+        strip.fill(self.color)
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():
             strip.show()
+            strip.timeout = 1
 
 if __name__ == "__main__":
     strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
