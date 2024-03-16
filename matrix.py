@@ -10,7 +10,7 @@ class Rainbow(pixelstrip.Animation):
             for y in range(8):
                 matrix[x,y] = (red, green, blue, 0)
     def __init__(self):
-        matrix.increment = 0
+        self.increment = 0
         pixelstrip.Animation.__init__(self)
         # self.color = GREEN
         self.timeout = 0.0
@@ -19,15 +19,15 @@ class Rainbow(pixelstrip.Animation):
         self.timeout = 0.0
     def draw(self, matrix, delta_time):
         if self.is_timed_out():
-            matrix.increment = (matrix.increment + .1) % (math.pi*3/2)
-            if matrix.increment <= math.pi/2:
-                matrix.color = matrix.increment % (math.pi/2)
+            self.increment = (self.increment + .1) % (math.pi*3/2)
+            if self.increment <= math.pi/2:
+                matrix.color = self.increment % (math.pi/2)
                 self.fill(int(abs(math.cos(matrix.color)*10)), 0, int(abs(math.sin(matrix.color)*10)))
-            elif matrix.increment <= math.pi:
-                matrix.color = matrix.increment%(math.pi/2)
+            elif self.increment <= math.pi:
+                matrix.color = self.increment%(math.pi/2)
                 self.fill(0, int(abs(math.sin(matrix.color)*10)), int(abs(math.cos(matrix.color)*10)))
             else:
-                matrix.color = matrix.increment% (math.pi/2)
+                matrix.color = self.increment% (math.pi/2)
                 self.fill(int(abs(math.sin(matrix.color)*10)), int(abs(math.cos(matrix.color)*10)), 0)
             self.timeout = 0.001
             matrix.show()

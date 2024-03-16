@@ -6,7 +6,7 @@ import random
 
 
 class CircleSpinner(pixelstrip.Animation):
-    def line(self, y, length):
+    def line(self,strip, y, length):
         for i in range(length):
                 if y+i >= 0 and y+i < strip.n:
                     strip[y+i] = (255, 30, 0 ,0)
@@ -18,7 +18,7 @@ class CircleSpinner(pixelstrip.Animation):
     def draw(self, strip, delta_time):
         if self.is_timed_out():
             strip.fill(0)
-            self.line(self.pos, strip.n/3)
+            self.line(strip, self.pos, strip.n/3)
             self.pos = (self.pos+1) % strip.n 
             self.timeout = 0.1
             strip.show()

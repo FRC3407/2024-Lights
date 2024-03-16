@@ -1,15 +1,15 @@
 import pixelstrip
 import board 
 from colors import *
-import math
-import random
 
 
 class FillWhite(pixelstrip.Animation):
     def __init__(self):
-        strip.fill((255, 255, 255))
+        pass
     def reset(self, strip):
         self.timeout = 0.0
+        strip.fill(WHITE)
+
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():

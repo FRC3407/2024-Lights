@@ -1,32 +1,48 @@
 import digitalio
 import board
-from circle_spinner import 
 from i2ctarget import I2CTarget
 from pixelstrip import PixelStrip, current_time
+
 from animation_pulse import PulseAnimation
+from circle_spinner import *
+from matrix import *
+from FillRed import *
+from FillWhite import *
+import conways_game_of_life
+from circle_spinner import *
+from orange_reverse_linear_matrix import *
+from orange_reverse_matrix import *
+from spin_flash import *
 
 I2C_ADDRESS = 0x41
 BRIGHTNESS = 0.5
 
 # List of Animations
 animation = [
-    
+    ReverseOrangeCoder(),
+    Coder(),
+    CircleSpinner(),
+    PulseAnimation(),
+    FillRed(),
+    FillWhite(),
+    conways_game_of_life.Coder(),
+    # Add more animations here
 ]
 
 # List of PixelStrips
 strip = [
-    PixelStrip(board.NEOPIXEL0, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL1, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL3, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL4, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL5, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS)
+    PixelStrip(board.NEOPIXEL0, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL1, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL3, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL4, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL5, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS)
 ]
 
 # The built-in LED will turn on for half a second after every message
 led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
-i2c = I2CTarget(scl=board.GP7, sda=board.GP6, addresses=[I2C_ADDRESS])
+i2c = I2CTarget(scl=board.SCL, sda=board.SDA, addresses=[I2C_ADDRESS])
 
 # Receive one byte through I2C, if available
 def receive_message():
@@ -44,6 +60,7 @@ def main():
     global strip, led
     for s in strip:
         s.clear()
+    strip[0].animation = animation[6]
     last_msg_time = 0.0
     while True:
         for s in strip:
