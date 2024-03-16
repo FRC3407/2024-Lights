@@ -6,7 +6,7 @@ import random
 
 
 class Coder(pixelstrip.Animation):
-    def line(self, y, length):
+    def line(self, strip, y, length):
         for i in range(length):
                 if y-i >= 0 and y-i < strip.n:
                     print(f"y={y}\ni={i}\n")
@@ -14,11 +14,11 @@ class Coder(pixelstrip.Animation):
                         strip[y-i] = (0, 0, 0, 0)
                     else: 
                         strip[y-i] = (255, 30, 0 ,0)
-    def __init__(self, cycle_time):
+    def __init__(self, cycle_time=0.1):
         self.yPos = []
         self.length = []
         self.timeout = 0.0
-        self.yPos.append(random.randrange(0, strip.n+7))
+        #self.yPos.append(random.randrange(0, strip.n + 7))
         self.length.append(random.randrange(0, 7))
         self.time = cycle_time
     def reset(self, strip):
@@ -32,7 +32,7 @@ class Coder(pixelstrip.Animation):
                 self.length.append(random.randrange(1, strip.n))
             for stuff in range(len(self.yPos)):
                 if self.yPos[stuff] >= 0:
-                    self.line(self.yPos[stuff], self.length[stuff])
+                    self.line(strip, self.yPos[stuff], self.length[stuff])
                     self.yPos[stuff] = self.yPos[stuff] + 1
             self.timeout = self.time
             strip.show()

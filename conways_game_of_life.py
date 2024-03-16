@@ -22,7 +22,7 @@ import random
 
 # The width and height can be customized!
 width=8
-height=8
+height=1
 pixels=width*height
 
 # Uncomment this to have a preset screen
