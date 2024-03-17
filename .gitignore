@@ -1,0 +1,9 @@
+._*
+.DS_Store
+.idea
+.metadata_never_index
+.Trashes
+.vscode
+boot_out.txt
+no_log
+settings.toml
