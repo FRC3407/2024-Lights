@@ -5,28 +5,49 @@ from pixelstrip import PixelStrip, current_time
 
 from animation_pulse import PulseAnimation
 from circle_spinner import *
-from matrix import *
-from FillRed import *
-from FillWhite import *
+import green_matrix
+from fill import *
 import conways_game_of_life
+import linear_matrix
 from circle_spinner import *
 from orange_reverse_linear_matrix import *
 from orange_reverse_matrix import *
 from spin_flash import *
+from animation_bitmap import *
+from pointer import *
 
 I2C_ADDRESS = 0x41
 BRIGHTNESS = 0.5
 
 # List of Animations
 animation = [
-    ReverseOrangeCoder(),
-    Coder(),
     CircleSpinner(),
-    PulseAnimation(),
-    FillRed(),
-    FillWhite(),
+    CircleSpinner(),
+    CircleSpinner(),
+
+    linear_matrix.Coder(),
+    linear_matrix.Coder(),
+    linear_matrix.Coder(),
+
+    green_matrix.Coder(),
+
     conways_game_of_life.Coder(),
-    # Add more animations here
+
+    ReverseOrangeCoder(cycle_time=0.1),
+    ReverseOrangeCoder(cycle_time=0.1),
+    ReverseOrangeCoder(cycle_time=0.05),
+    ReverseOrangeCoder(cycle_time=0.05),
+    
+    Flash(),
+
+    Fill(color=RED),
+    Fill(color=GREEN),
+    Fill(color=WHITE),
+
+    BitmapAnimation(),
+
+    Pointing()
+    # Add way more animations here
 ]
 
 # List of PixelStrips
