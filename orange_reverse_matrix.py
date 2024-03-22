@@ -40,6 +40,9 @@ class ReverseOrangeCoder(pixelstrip.Animation):
                 if self.yPos[stuff] >= 0:
                     self.line(matrix,self.xPos[stuff], self.yPos[stuff], self.length[stuff])
                     self.yPos[stuff] = self.yPos[stuff] + 1
+                else:
+                    self.yPos.remove(stuff)
+                    self -= 1
             self.timeout = self.time
             matrix.show()
 
