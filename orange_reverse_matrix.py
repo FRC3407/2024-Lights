@@ -40,11 +40,14 @@ class ReverseOrangeCoder(pixelstrip.Animation):
                 if self.yPos[stuff] >= 0:
                     self.line(matrix,self.xPos[stuff], self.yPos[stuff], self.length[stuff])
                     self.yPos[stuff] = self.yPos[stuff] + 1
+                else:
+                    self.yPos.remove(stuff)
+                    self -= 1
             self.timeout = self.time
             matrix.show()
 
 if __name__ == "__main__":
-    matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
+    matrix = pixelstrip.PixelStrip(board.D12, width=1, height=1, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
     matrix.timeout = 0.7
 
     matrix.animation = ReverseOrangeCoder(cycle_time=0.1)

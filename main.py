@@ -52,11 +52,11 @@ animation = [
 
 # List of PixelStrips
 strip = [
-    PixelStrip(board.NEOPIXEL0, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL1, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL3, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL4, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL5, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS)
+    PixelStrip(board.NEOPIXEL0, 144, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG}),
+    PixelStrip(board.NEOPIXEL1, width=32, height=8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL2, width=8, height=8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL3, 24, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL4, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS)
 ]
 
 # The built-in LED will turn on for half a second after every message

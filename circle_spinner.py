@@ -20,13 +20,13 @@ class CircleSpinner(pixelstrip.Animation):
             strip.fill(0)
             self.line(strip, self.pos, strip.n/3)
             self.pos = (self.pos+1) % strip.n 
-            self.timeout = 0.1
+            self.timeout = 0.05
             strip.show()
 
 
 if __name__ == "__main__":
     strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
-    strip.timeout = 0.7
+    strip.timeout = 0.05
 
     strip.animation = CircleSpinner()
 
