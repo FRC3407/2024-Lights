@@ -17,7 +17,7 @@ class ReverseOrangeCoder(pixelstrip.Animation):
                         matrix[x, y-i] = (0, 0, 0, 0)
                     else:
                         matrix[x, y-i] = (255, 30, 0, 0)
-    def __init__(self, cycle_time=0.1):
+    def __init__(self, cycle_time):
         self.xPos = []
         self.yPos = []
         self.length = []
