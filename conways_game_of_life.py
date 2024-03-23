@@ -21,8 +21,8 @@ import math
 import random
 
 # The width and height can be customized!
-width=8
-height=1
+width=32
+height=8
 pixels=width*height
 
 # Uncomment this to have a preset screen
@@ -88,7 +88,7 @@ class Coder(pixelstrip.Animation):
     def draw(self, strip, delta_time):
         global screen,new_screen,neighbor_indices
         if self.is_timed_out():
-            self.timeout = 0.3
+            self.timeout = 0.4
             for i in range(pixels):
                 n=0
                 for j in neighbor_indices:
@@ -101,23 +101,16 @@ class Coder(pixelstrip.Animation):
                 else:
                     if n==3:
                         new_screen[i]=True
-                # if screen[i]:
-                #     new_screen[i]=False
-                #     new_screen[min(i+1,63)]=True
-                #     pass
-            # if random.randint(0,20)==0:
-            #     for i in range(45):
-            #         new_screen[random.randint(0,pixels-1)]=random.randint(0,1)
-            if sum(screen)<=15:
+
+            if sum(screen)<=15 or self.t>100:
                 for i in range(pixels):
                     new_screen[i]=(random.randint(0,1)==0)
+                self.t=0
             screen=new_screen.copy()
-            # strip[self.t%64]=(self.t,0,self.t/100,0)
+            
             for i in range(pixels):
                 y=int(i/width)
                 x=i%width
-                if y%2==0:
-                    x=(width-1)-x
                 strip[x,y]=hsv_to_rgb((self.t/100)%1,0.8,25,0) if screen[i] else BLACK
             self.t+=1
             strip.show()
