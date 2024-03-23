@@ -29,7 +29,7 @@ MAX_TIME = FLASH_DURATION*3 + BLANK_DURATION*3
 COLORS = [
     (2,6,20,0),
     (2,6,20,0),
-    (25,4,1,0),
+    (255,30,0,0)
 ]
 
 class Flash(pixelstrip.Animation):
