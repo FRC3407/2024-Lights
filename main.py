@@ -14,7 +14,8 @@ from orange_reverse_linear_matrix import *
 from orange_reverse_matrix import *
 from spin_flash import *
 from animation_bitmap import *
-from pointer import *
+#from pointer import *
+from flash import *
 
 I2C_ADDRESS = 0x41
 BRIGHTNESS = 0.5
@@ -46,7 +47,7 @@ animation = [
 
     BitmapAnimation(),
 
-    Pointing()
+    # Pointing()
     # Add way more animations here
 ]
 
@@ -81,7 +82,7 @@ def main():
     global strip, led
     for s in strip:
         s.clear()
-    strip[0].animation = animation[6]
+    #strip[0].animation = animation[0]
     last_msg_time = 0.0
     while True:
         for s in strip:

@@ -21,8 +21,8 @@ import math
 import random
 import time
 
-FLASH_DURATION = 0.3
-BLANK_DURATION = 0.2
+FLASH_DURATION = 0.132
+BLANK_DURATION = 0.132
 BLINK_TIME = FLASH_DURATION + BLANK_DURATION
 MAX_TIME = FLASH_DURATION*3 + BLANK_DURATION*3
 
@@ -51,7 +51,7 @@ class Flash(pixelstrip.Animation):
             # print(blink)
             if t > BLANK_DURATION and relative_time < MAX_TIME: # Flash on
                 color = COLORS[blink]
-                print(color)
+                #print(color)
                 matrix.fill(color)
                 # matrix[5]=(255,255,255,0)
                 print("horray!")

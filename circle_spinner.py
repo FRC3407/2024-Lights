@@ -11,16 +11,33 @@ class CircleSpinner(pixelstrip.Animation):
                 if y+i >= 0 and y+i < strip.n:
                     strip[y+i] = (255, 30, 0 ,0)
     def __init__(self):
+        self.b = 1
         self.pos = 0
+        self.t = 0.05
+        self.timeout = 0.05
     def reset(self, strip):
         self.timeout = 0.0
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():
             strip.fill(0)
-            self.line(strip, self.pos, strip.n/3)
-            self.pos = (self.pos+1) % strip.n 
-            self.timeout = 0.05
+            self.line(strip, self.pos, strip.n/27)
+            self.pos = (self.pos+self.b) % strip.n
+            if self.t != 0.0:
+                if self.pos == 24:
+                    self.t = self.t - 0.01
+            elif self.pos == 24 and self.b < 7:
+                self.b = self.b + 1
+            # elif self.pos == 24 and self.b > 1:
+            #     self.b = self.b - 1
+            # elif self.b == 1 and self.pos == 0:
+            #     self.t = self.t + 0.01
+            #     self.timeout = self.t
+
+            print(self.t)
+            
+            self.timeout = self.t
+
             strip.show()
 
 
