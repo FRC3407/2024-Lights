@@ -111,7 +111,7 @@ class Coder(pixelstrip.Animation):
             for i in range(pixels):
                 y=int(i/width)
                 x=i%width
-                strip[x,y]=hsv_to_rgb((self.t/100)%1,0.8,25,0) if screen[i] else BLACK
+                strip[x,y]=hsv_to_rgb((self.t/100)%1,0.9,255,0) if screen[i] else BLACK
             self.t+=1
             strip.show()
 
