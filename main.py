@@ -92,6 +92,7 @@ def main():
             anim_num = message[1]
             if strip_num < len(strip) and anim_num < len(animation):
                 strip[strip_num].animation = animation[anim_num]
+                print(f"RECEIVE({strip_num},{anim_num})\n")
             last_msg_time = current_time()
         led.value = (current_time() < last_msg_time + 0.5)
 
