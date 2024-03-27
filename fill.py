@@ -7,9 +7,9 @@ import random
 
 class Fill(pixelstrip.Animation):
     def __init__(self, color):
+        pass
+    def reset(self, strip, color, delta_time):
         strip.fill(color)
-    def reset(self, strip):
-        self.timeout = 0.0
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():

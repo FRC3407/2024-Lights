@@ -5,7 +5,7 @@ import math
 import random
 
 class Coder(pixelstrip.Animation):
-    def line(self, y, length):
+    def line(self, strip, y, length):
         for i in range(length):
                 if y-i >= 0 and y-i <= strip.n:
                     if i == 0:
@@ -16,12 +16,14 @@ class Coder(pixelstrip.Animation):
                         strip[y-i] = (0, 15, 0, 0)
                     if i > length/2:
                         strip[y-i] = (int(abs(0.5*math.cos(math.pi*i/(length*0.1)))), 15, int(abs(0.5*5*math.cos(math.pi*i/(length*0.1)))), 0)
+ 
     def __init__(self):
         self.yPos = []
         self.length = []
         self.timeout = 0.0
-        self.yPos.append(random.randrange(0, strip.n+7))
-        self.length.append(random.randrange(0, 7))
+        self.yPos.append(7)
+        self.length.append(random.randrange(0, 1))
+        
     def reset(self, strip):
         self.timeout = 0.0
 
@@ -32,9 +34,9 @@ class Coder(pixelstrip.Animation):
                 self.length.append(random.randrange(1, strip.n))
             for stuff in range(len(self.yPos)):
                 if self.yPos[stuff] >= 0:
-                    self.line(self.yPos[stuff], self.length[stuff])
+                    self.line(strip, self.yPos[stuff], self.length[stuff])
                     self.yPos[stuff] = self.yPos[stuff] - 1
-                else:
+                elif stuff in self.yPos:
                     self.yPos.remove(stuff)
                     self -= 1
             self.timeout = 0.1

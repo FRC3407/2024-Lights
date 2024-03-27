@@ -14,10 +14,11 @@ from orange_reverse_linear_matrix import *
 from orange_reverse_matrix import *
 from spin_flash import *
 from animation_bitmap import *
-from pointer import *
+#from pointer import *
+from flash import *
 
 I2C_ADDRESS = 0x41
-BRIGHTNESS = 0.5
+BRIGHTNESS = 1.0
 
 # List of Animations
 animation = [
@@ -25,18 +26,18 @@ animation = [
     CircleSpinner(),
     CircleSpinner(),
 
-    linear_matrix.Coder(),
-    linear_matrix.Coder(),
-    linear_matrix.Coder(),
+    # linear_matrix.Coder(),
+    # linear_matrix.Coder(),
+    # linear_matrix.Coder(),
 
-    green_matrix.Coder(),
+    # green_matrix.Coder(),
 
     conways_game_of_life.Coder(),
 
-    ReverseOrangeCoder(cycle_time=0.1),
-    ReverseOrangeCoder(cycle_time=0.1),
-    ReverseOrangeCoder(cycle_time=0.05),
-    ReverseOrangeCoder(cycle_time=0.05),
+    # ReverseOrangeCoder(cycle_time=0.1),
+    # ReverseOrangeCoder(cycle_time=0.1),
+    # ReverseOrangeCoder(cycle_time=0.05),
+    # ReverseOrangeCoder(cycle_time=0.05),
     
     Flash(),
 
@@ -46,14 +47,14 @@ animation = [
 
     BitmapAnimation(),
 
-    Pointing()
+    # Pointing()
     # Add way more animations here
 ]
 
 # List of PixelStrips
 strip = [
-    PixelStrip(board.NEOPIXEL0, 144, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG}),
-    PixelStrip(board.NEOPIXEL1, width=32, height=8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL0, 144, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
+    PixelStrip(board.NEOPIXEL1, width=32, height=8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG}),
     PixelStrip(board.NEOPIXEL2, width=8, height=8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
     PixelStrip(board.NEOPIXEL3, 24, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
     PixelStrip(board.NEOPIXEL4, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS)
@@ -81,7 +82,7 @@ def main():
     global strip, led
     for s in strip:
         s.clear()
-    strip[0].animation = animation[6]
+    strip[1].animation = animation[3]
     last_msg_time = 0.0
     while True:
         for s in strip:

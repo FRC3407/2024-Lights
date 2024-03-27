@@ -15,22 +15,20 @@
                 ||     ||
 """
 import pixelstrip
-import board 
+import board
 from colors import *
 import math
 import random
 import time
+from noise import noise
 
-FLASH_DURATION = 0.132
-BLANK_DURATION = 0.132
-BLINK_TIME = FLASH_DURATION + BLANK_DURATION
-MAX_TIME = FLASH_DURATION*3 + BLANK_DURATION*3
-
-COLORS = [
-    (2,6,20,0),
-    (2,6,20,0),
-    (255,30,0,0)
-]
+# This is run for every pixel and returns a color, the t value is the time in seconds since the animation started
+# The x and y values go from 0 to 1
+def pix(x,y,t) -> Tuple:
+    r = noise(x*2+t+10000,y*2)*255
+    g = noise(x*2+t+20000,y*2)*255
+    b = noise(x*2+t+30000,y*2)*255
+    return (r,g,b)
 
 class Flash(pixelstrip.Animation):
     def __init__(self):
@@ -44,28 +42,20 @@ class Flash(pixelstrip.Animation):
     def draw(self, matrix, delta_time):
         if self.is_timed_out():
             relative_time = time.monotonic() - self.start_time
-            matrix.fill((0,0,0,0))
-            
-            t = relative_time%BLINK_TIME
-            blink = int(relative_time/BLINK_TIME)
-            # print(blink)
-            if t > BLANK_DURATION and relative_time < MAX_TIME: # Flash on
-                color = COLORS[blink]
-                #print(color)
-                matrix.fill(color)
-                # matrix[5]=(255,255,255,0)
-                print("horray!")
+            for y in range(matrix.height):
+                for x in range(matrix.width):
+                    matrix[x,y]=pix(x/matrix.width,y/matrix.height,relative_time)
 
 
             matrix.show()
-            self.timeout = 0.05
+            self.timeout = 0.0
             
                 
 
 
 
 if __name__ == "__main__":
-    matrix = pixelstrip.PixelStrip(board.GP15, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_ZIGZAG, pixelstrip.MATRIX_COLUMN_MAJOR})
+    matrix = pixelstrip.PixelStrip(board.GP15, width=8, height=11, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_ZIGZAG, pixelstrip.MATRIX_COLUMN_MAJOR}, brightness=0.4)
     matrix.timeout = 0.7
 
     matrix.animation = Flash()
