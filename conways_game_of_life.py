@@ -21,9 +21,8 @@ import math
 import random
 
 # The width and height can be customized!
-width=32
-height=8
-pixels=width*height
+# width=24
+# height=2
 
 # Uncomment this to have a preset screen
 # screen=[
@@ -36,17 +35,7 @@ pixels=width*height
 #     0,0,0,0,0,0,0,0,
 #     0,0,0,0,0,0,0,0,
 # ]
-screen=[]
-new_screen=[]
-for i in range(pixels):
-    screen.append(random.randint(0,1)==0)
-new_screen=screen.copy()
 
-neighbor_indices=[
-    -width-1, -width, -width+1,
-          -1,                1,
-     width-1,  width,  width+1
-]
 scalar=float
 def hsv_to_rgb( h:scalar, s:scalar, v:scalar, a:scalar ) -> tuple:
     if s:
@@ -81,6 +70,17 @@ class Coder(pixelstrip.Animation):
     def __init__(self):
         self.timeout = 0.0
         self.t=0
+        self.neighbor_indices=[
+            -strip.width-1, -strip.width, -strip.width+1,
+                        -1,                            1,
+             strip.width-1,  strip.width,  strip.width+1
+        ]
+        self.pixels=strip.width*strip.height
+        self.screen=[]
+        self.new_screen=[]
+        for i in range(self.pixels):
+            self.screen.append(random.randint(0,1)==0)
+        self.new_screen=self.screen.copy()
         print("init\n")
     def reset(self, strip):
         self.timeout = 0.0
@@ -89,38 +89,43 @@ class Coder(pixelstrip.Animation):
         global screen,new_screen,neighbor_indices
         if self.is_timed_out():
             self.timeout = 0.4
-            for i in range(pixels):
+            for i in range(self.pixels):
                 n=0
-                for j in neighbor_indices:
-                    n+=screen[(i+j)%pixels]
-                if screen[i]:
+                for j in self.neighbor_indices:
+                    n+=self.screen[(i+j)%self.pixels]
+                if self.screen[i]:
                     if n<=1 or n>=4:
-                        new_screen[i]=False
+                        self.new_screen[i]=False
                     else:
-                        new_screen[i]=True
+                        self.new_screen[i]=True
                 else:
                     if n==3:
-                        new_screen[i]=True
+                        self.new_screen[i]=True
 
-            if sum(screen)<=15 or self.t>100:
-                for i in range(pixels):
-                    new_screen[i]=(random.randint(0,1)==0)
+            if sum(self.screen)<=2 or self.t>100:
+                for i in range(self.pixels):
+                    self.new_screen[i]=(random.randint(0,1)==0)
                 self.t=0
-            screen=new_screen.copy()
-            
-            for i in range(pixels):
-                y=int(i/width)
-                x=i%width
-                strip[x,y]=hsv_to_rgb((self.t/100)%1,0.8,25,0) if screen[i] else BLACK
+            self.screen=self.new_screen.copy()
+
+            for i in range(self.pixels):
+                y=int(i/strip.width)
+                x=i%strip.width
+                if y%2==1:
+                    x=(strip.width-1)-x
+                strip[x,y]=hsv_to_rgb((self.t/10)%1,0.8,25,0) if self.screen[i] else BLACK
+            # strip[self.t%strip.width,int(self.t/strip.width)]=(20,0,20)
             self.t+=1
             strip.show()
 
 
 if __name__ == "__main__":
-    strip = pixelstrip.PixelStrip(board.D15, width=width, height=height, bpp=4, pixel_order=pixelstrip.GRB) # the `board.D15` didn't work on one of the RPis that I used, if it doesn't work replace it with `board.GP15`
+    strip = pixelstrip.PixelStrip(board.GP15, width=8, height=8, bpp=4, pixel_order="GRB", brightness=1)
     strip.timeout = 0.7
 
     strip.animation = Coder()
+
+    print("I'm alive!")
 
     while True:
         strip.draw()
