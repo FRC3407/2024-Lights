@@ -14,7 +14,7 @@ from orange_reverse_linear_matrix import *
 from orange_reverse_matrix import *
 from spin_flash import *
 from animation_bitmap import *
-#from pointer import *
+from pointer import *
 from flash import *
 
 I2C_ADDRESS = 0x41
@@ -26,18 +26,18 @@ animation = [
     CircleSpinner(),
     CircleSpinner(),
 
-    # linear_matrix.Coder(),
-    # linear_matrix.Coder(),
-    # linear_matrix.Coder(),
+    linear_matrix.Coder(),
+    linear_matrix.Coder(),
+    linear_matrix.Coder(),
 
-    # green_matrix.Coder(),
+    green_matrix.Coder(),
 
     conways_game_of_life.Coder(),
 
-    # ReverseOrangeCoder(cycle_time=0.1),
-    # ReverseOrangeCoder(cycle_time=0.1),
-    # ReverseOrangeCoder(cycle_time=0.05),
-    # ReverseOrangeCoder(cycle_time=0.05),
+    ReverseOrangeCoder(cycle_time=0.1),
+    ReverseOrangeCoder(cycle_time=0.1),
+    ReverseOrangeCoder(cycle_time=0.05),
+    ReverseOrangeCoder(cycle_time=0.05),
     
     Flash(),
 
@@ -45,9 +45,9 @@ animation = [
     Fill(color=GREEN),
     Fill(color=WHITE),
 
-    BitmapAnimation(),
+    PulseAnimation(),
 
-    # Pointing()
+    Pointing()
     # Add way more animations here
 ]
 
@@ -57,7 +57,7 @@ strip = [
     PixelStrip(board.NEOPIXEL1, width=32, height=8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG}),
     PixelStrip(board.NEOPIXEL2, width=8, height=8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
     PixelStrip(board.NEOPIXEL3, 24, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
-    PixelStrip(board.NEOPIXEL4, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS)
+    PixelStrip(board.NEOPIXEL4, 24, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS)
 ]
 
 # The built-in LED will turn on for half a second after every message
@@ -94,6 +94,8 @@ def main():
             if strip_num < len(strip) and anim_num < len(animation):
                 strip[strip_num].animation = animation[anim_num]
                 print(f"RECEIVE({strip_num},{anim_num})\n")
+            elif strip_num < len(strip):
+                strip[strip_num].animation = None
             last_msg_time = current_time()
         led.value = (current_time() < last_msg_time + 0.5)
 
