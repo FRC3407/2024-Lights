@@ -70,14 +70,12 @@ class Coder(pixelstrip.Animation):
     def __init__(self):
         self.timeout = 0.0
         self.t=0
-        width=32
-        height=8
         self.neighbor_indices=[
-            -width-1, -width, -width+1,
-                  -1,                1,
-             width-1,  width,  width+1
+            -strip.width-1, -strip.width, -strip.width+1,
+                        -1,                            1,
+             strip.width-1,  strip.width,  strip.width+1
         ]
-        self.pixels=width*height
+        self.pixels=strip.width*strip.height
         self.screen=[]
         self.new_screen=[]
         for i in range(self.pixels):
@@ -104,7 +102,7 @@ class Coder(pixelstrip.Animation):
                     if n==3:
                         self.new_screen[i]=True
 
-            if sum(self.screen)<=6 or self.t>100:
+            if sum(self.screen)<=2 or self.t>100:
                 for i in range(self.pixels):
                     self.new_screen[i]=(random.randint(0,1)==0)
                 self.t=0
@@ -113,11 +111,8 @@ class Coder(pixelstrip.Animation):
             for i in range(self.pixels):
                 y=int(i/strip.width)
                 x=i%strip.width
-                # if y%2==1:
-                    # x=(strip.width-1)-x
-                # print("=--------")
-                # print(x,y,i)
-                # print(strip.width,strip.height,len(self.screen))
+                if y%2==1:
+                    x=(strip.width-1)-x
                 strip[x,y]=hsv_to_rgb((self.t/10)%1,0.8,25,0) if self.screen[i] else BLACK
             # strip[self.t%strip.width,int(self.t/strip.width)]=(20,0,20)
             self.t+=1
