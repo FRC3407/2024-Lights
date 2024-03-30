@@ -27,8 +27,8 @@ BLINK_TIME = FLASH_DURATION + BLANK_DURATION
 MAX_TIME = FLASH_DURATION*3 + BLANK_DURATION*3
 
 COLORS = [
-    (2,6,20,0),
-    (2,6,20,0),
+    (0, 255, 0,0),
+    (0, 255, 0,0),
     (255,30,0,0)
 ]
 
@@ -36,6 +36,7 @@ class Flash(pixelstrip.Animation):
     def __init__(self):
         self.start_time = time.monotonic()
         self.timeout = 0.0
+        self.color = (0,0,0,0)
         pixelstrip.Animation.__init__(self)
 
     def reset(self, strip):
@@ -44,15 +45,16 @@ class Flash(pixelstrip.Animation):
     def draw(self, matrix, delta_time):
         if self.is_timed_out():
             relative_time = time.monotonic() - self.start_time
-            matrix.fill((0,0,0,0))
+            if self.color is not COLORS[2]:
+                matrix.fill((0,0,0,0))
             
             t = relative_time%BLINK_TIME
             blink = int(relative_time/BLINK_TIME)
             # print(blink)
             if t > BLANK_DURATION and relative_time < MAX_TIME: # Flash on
-                color = COLORS[blink]
+                self.color = COLORS[blink]
                 #print(color)
-                matrix.fill(color)
+                matrix.fill(self.color)
                 # matrix[5]=(255,255,255,0)
                 print("horray!")
 
