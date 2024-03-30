@@ -36,13 +36,15 @@ class ReverseOrangeCoder(pixelstrip.Animation):
                 self.xPos.append(random.randrange(0, matrix.width))
                 self.yPos.append(random.randrange(-7, matrix.height+1))
                 self.length.append(random.randrange(0, 7))
-            for stuff in range(len(self.xPos)):
+            stuff = 0
+            while stuff<len(self.yPos):
                 if self.yPos[stuff] >= 0:
                     self.line(matrix,self.xPos[stuff], self.yPos[stuff], self.length[stuff])
                     self.yPos[stuff] = self.yPos[stuff] + 1
                 else:
                     self.yPos.remove(stuff)
-                    self -= 1
+                    stuff -= 1
+                stuff += 1
             self.timeout = self.time
             matrix.show()
 

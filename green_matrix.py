@@ -5,10 +5,10 @@ import math
 import random
 
 class Coder(pixelstrip.Animation):
-    def line(self, x, y, length):
+    def line(self, x, y, length, matrix):
         for i in range(length):
-            if x <= matrix.width and x >= 0:
-                if y-i >= 0 and y-i <= matrix.height:
+            if x < matrix.width and x >= 0:
+                if y-i >= 0 and y-i < matrix.height-1:
                     if i == 0:
                         matrix[x, y-i] = (0, 0, 0, 0)                   
                     if i < length/2 and not i == 0:
@@ -22,8 +22,6 @@ class Coder(pixelstrip.Animation):
         self.yPos = []
         self.length = []
         self.timeout = 0.0
-        self.xPos.append(random.randrange(0, matrix.width-1))
-        self.yPos.append(random.randrange(0, matrix.height+7))
         self.length.append(random.randrange(0, 7))
     def reset(self, matrix):
         self.timeout = 0.0
@@ -35,13 +33,19 @@ class Coder(pixelstrip.Animation):
                 self.xPos.append(random.randrange(0, matrix.width))
                 self.yPos.append(random.randrange(0, matrix.height+7))
                 self.length.append(random.randrange(1, 8))
-            for stuff in range(len(self.xPos)):
+            stuff=0
+            while stuff<len(self.yPos):
+                print("-------")
+                print(stuff)
+                print(self.yPos)
+                print(self.yPos[stuff])
                 if self.yPos[stuff] >= 0:
-                    self.line(self.xPos[stuff], self.yPos[stuff], self.length[stuff])
+                    self.line(self.xPos[stuff], self.yPos[stuff], self.length[stuff], matrix)
                     self.yPos[stuff] = self.yPos[stuff] - 1
                 else:
-                    self.yPos.remove(stuff)
-                    self -= 1
+                    self.yPos.pop(stuff)
+                    stuff -= 1
+                stuff += 1
             self.timeout = 0.1
             matrix.show()
 

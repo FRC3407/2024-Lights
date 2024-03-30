@@ -26,18 +26,18 @@ animation = [
     CircleSpinner(),
     CircleSpinner(),
 
-    # linear_matrix.Coder(),
-    # linear_matrix.Coder(),
-    # linear_matrix.Coder(),
+    linear_matrix.Coder(),
+    linear_matrix.Coder(),
+    linear_matrix.Coder(),
 
-    # green_matrix.Coder(),
+    green_matrix.Coder(),
 
     conways_game_of_life.Coder(),
 
-    # ReverseOrangeCoder(cycle_time=0.1),
-    # ReverseOrangeCoder(cycle_time=0.1),
-    # ReverseOrangeCoder(cycle_time=0.05),
-    # ReverseOrangeCoder(cycle_time=0.05),
+    ReverseOrangeCoder(cycle_time=0.1),
+    ReverseOrangeCoder(cycle_time=0.1),
+    ReverseOrangeCoder(cycle_time=0.05),
+    ReverseOrangeCoder(cycle_time=0.05),
     
     Flash(),
 
@@ -74,6 +74,7 @@ def receive_message():
         b = message.read(n=1)[0]
         strip_num = int((b & 0xE0) >> 5)
         anim_num = int(b & 0x1F)
+        print(f"received {(strip_num, anim_num)}")
         return (strip_num, anim_num)
     else:
         return None
@@ -82,7 +83,7 @@ def main():
     global strip, led
     for s in strip:
         s.clear()
-    strip[1].animation = animation[3]
+    strip[1].animation = animation[7]
     last_msg_time = 0.0
     while True:
         for s in strip:
