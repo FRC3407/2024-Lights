@@ -1,5 +1,6 @@
 import digitalio
 import board
+from time import sleep
 from i2ctarget import I2CTarget
 from pixelstrip import PixelStrip, current_time
 
@@ -45,7 +46,7 @@ animation = [
     Fill(color=GREEN),
     Fill(color=WHITE),
 
-    PulseAnimation(),
+    PulseAnimation([GREEN, DARKSLATEGRAY]),
 
     #Pointing()
     # Add way more animations here
@@ -66,7 +67,7 @@ led.direction = digitalio.Direction.OUTPUT
 
 i2c = I2CTarget(scl=board.SCL, sda=board.SDA, addresses=[I2C_ADDRESS])
 
-# Receive one byte through I2C, if available
+# Receive one byte through I2C, if available 
 def receive_message():
     global i2c
     message = i2c.request()
@@ -79,12 +80,9 @@ def receive_message():
     else:
         return None
 
-def main():
+def main(): 
     global strip, led
-    print("I'm alive!")
-    for s in strip:
-        s.clear()
-    strip[1].animation = animation[12]
+    blink(3)
     last_msg_time = 0.0
     while True:
         for s in strip:
@@ -101,4 +99,21 @@ def main():
             last_msg_time = current_time()
         led.value = (current_time() < last_msg_time + 0.5)
 
-main()
+def blink(n, color=BLUE, sleep_time=0.4): 
+    """Blink lights to show that the program has loaded successfully"""
+    global strip
+    for s in strip:
+        s.clear()
+    for _ in range(n):
+        for s in strip:
+            s[0] = color
+            s.show()
+        sleep(sleep_time)
+        for s in strip:
+            s.clear()
+            s.show()
+        sleep(sleep_time)
+
+
+if __name__ == "__main__":
+    main()
