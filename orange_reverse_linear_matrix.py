@@ -27,16 +27,18 @@ class Coder(pixelstrip.Animation):
     def draw(self, strip, delta_time):
         if self.is_timed_out():
             strip.fill(0)
-            for i in range(strip.n/20):
-                self.yPos.append(random.randrange(0, strip.n))
-                self.length.append(random.randrange(1, strip.n))
-            for stuff in range(len(self.yPos)):
-                if self.yPos[stuff] >= 0:
+            stuff = 0
+            while stuff<len(self.yPos):
+                if self.yPos[stuff] >= 0 or self.yPos[stuff] < strip.n:
                     self.line(strip, self.yPos[stuff], self.length[stuff])
                     self.yPos[stuff] = self.yPos[stuff] + 1
                 else:
-                    self.yPos.remove(stuff)
-                    self -= 1
+                    self.yPos.append(random.randrange(0, strip.n))
+                    self.length.append(random.randrange(1, strip.n))
+                    self.yPos.pop(stuff)
+                    self.length.pop(stuff)
+                    stuff -= 1
+                stuff += 1
             self.timeout = self.time
             strip.show()
 

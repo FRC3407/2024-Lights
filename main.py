@@ -14,7 +14,7 @@ from orange_reverse_linear_matrix import *
 from orange_reverse_matrix import *
 from spin_flash import *
 from animation_bitmap import *
-from pointer import *
+#from pointer import *
 from flash import *
 
 I2C_ADDRESS = 0x41
@@ -47,7 +47,7 @@ animation = [
 
     PulseAnimation(),
 
-    Pointing()
+    #Pointing()
     # Add way more animations here
 ]
 
@@ -74,15 +74,17 @@ def receive_message():
         b = message.read(n=1)[0]
         strip_num = int((b & 0xE0) >> 5)
         anim_num = int(b & 0x1F)
+        print(f"received {(strip_num, anim_num)}")
         return (strip_num, anim_num)
     else:
         return None
 
 def main():
     global strip, led
+    print("I'm alive!")
     for s in strip:
         s.clear()
-    strip[1].animation = animation[3]
+    strip[1].animation = animation[12]
     last_msg_time = 0.0
     while True:
         for s in strip:
