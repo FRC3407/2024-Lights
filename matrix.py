@@ -61,7 +61,7 @@ class Coder(pixelstrip.Animation):
     def draw(self, matrix, delta_time):
         if self.is_timed_out():
 
-            for i in range(matrix.width/3):
+            for i in range(1):
                 self.xPos.append(random.randrange(0, matrix.width))
                 self.yPos.append(random.randrange(0, matrix.height+7))
                 self.length.append(random.randrange(1, 8))
