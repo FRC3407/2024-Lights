@@ -93,7 +93,7 @@ def receive_message():
     else:
         return None
 
-def main():
+def main(): 
     global strip, led
     blink(3)
     print("HELLO")
