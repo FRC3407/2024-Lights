@@ -27,26 +27,18 @@ animation = [
     CircleSpinner(),
     CircleSpinner(), #2
 
-    linear_matrix.Coder(), # 3
-    linear_matrix.Coder(), # 4
-    linear_matrix.Coder(), # 5
-    # PulseAnimation([GREEN, BLACK, DARKSLATEGRAY]), # 3
-    # PulseAnimation([GREEN, BLACK, DARKSLATEGRAY]), # 4
-    # PulseAnimation([GREEN, BLACK, DARKSLATEGRAY]), # 5
+    linear_matrix.Coder(),
+    linear_matrix.Coder(),
+    linear_matrix.Coder(),
 
-    # PulseAnimation([ORANGE, BLACK, YELLOW]), #6
-    green_matrix.Coder(), #6
+    green_matrix.Coder(),
 
-    conways_game_of_life.Coder(), #7
+    conways_game_of_life.Coder(),
 
-    # PulseAnimation([ORANGE, BLACK, YELLOW]), #8
-    # PulseAnimation([ORANGE, BLACK, YELLOW]), #9
-    # PulseAnimation([ORANGE, BLACK, YELLOW]), #10
-    # PulseAnimation([ORANGE, BLACK, YELLOW]), #11
-     ReverseOrangeCoder(cycle_time=0.05), #8
-     ReverseOrangeCoder(cycle_time=0.05), #9
-     ReverseOrangeCoder(cycle_time=0.01), #10
-     ReverseOrangeCoder(cycle_time=0.01), #11
+    ReverseOrangeCoder(cycle_time=0.1),
+    ReverseOrangeCoder(cycle_time=0.1),
+    ReverseOrangeCoder(cycle_time=0.05),
+    ReverseOrangeCoder(cycle_time=0.05),
     
     Flash(), #12
 
@@ -54,7 +46,7 @@ animation = [
     Fill(color=GREEN), #14
     Fill(color=WHITE), #15
 
-    PulseAnimation([GREEN, DARKSLATEGRAY]), #16
+    PulseAnimation(),
 
     # green_matrix.Coder() #17
     # linear_matrix.Coder(), #18
@@ -93,7 +85,7 @@ def receive_message():
     else:
         return None
 
-def main():
+def main(): 
     global strip, led
     blink(3)
     print("HELLO")
