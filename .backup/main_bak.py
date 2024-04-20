@@ -12,10 +12,10 @@ import conways_game_of_life
 import linear_matrix
 from circle_spinner import *
 from orange_reverse_linear_matrix import *
-from orange_reverse_matrix import ReverseOrangeCoder
+from orange_reverse_matrix import *
 from spin_flash import *
 from animation_bitmap import *
-from pointer import *
+#from pointer import *
 from flash import *
 
 I2C_ADDRESS = 0x41
@@ -27,26 +27,18 @@ animation = [
     CircleSpinner(),
     CircleSpinner(), #2
 
-    linear_matrix.Coder(), # 3
-    linear_matrix.Coder(), # 4
-    linear_matrix.Coder(), # 5
-    # PulseAnimation([GREEN, BLACK, DARKSLATEGRAY]), # 3
-    # PulseAnimation([GREEN, BLACK, DARKSLATEGRAY]), # 4
-    # PulseAnimation([GREEN, BLACK, DARKSLATEGRAY]), # 5
+    PulseAnimation([GREEN, BLACK, DARKSLATEGRAY]), # linear_matrix.Coder(),
+    PulseAnimation([GREEN, BLACK, DARKSLATEGRAY]), #linear_matrix.Coder(),
+    PulseAnimation([GREEN, BLACK, DARKSLATEGRAY]), #linear_matrix.Coder(), #5
 
-    # PulseAnimation([ORANGE, BLACK, YELLOW]), #6
-    green_matrix.Coder(), #6
+    green_matrix.Coder(),
 
     conways_game_of_life.Coder(), #7
 
-    # PulseAnimation([ORANGE, BLACK, YELLOW]), #8
-    # PulseAnimation([ORANGE, BLACK, YELLOW]), #9
-    # PulseAnimation([ORANGE, BLACK, YELLOW]), #10
-    # PulseAnimation([ORANGE, BLACK, YELLOW]), #11
-     ReverseOrangeCoder(cycle_time=0.05), #8
-     ReverseOrangeCoder(cycle_time=0.05), #9
-     ReverseOrangeCoder(cycle_time=0.01), #10
-     ReverseOrangeCoder(cycle_time=0.01), #11
+    PulseAnimation([ORANGE, BLACK, YELLOW]), # ReverseOrangeCoder(cycle_time=0.1),
+    PulseAnimation([ORANGE, BLACK, YELLOW]), # ReverseOrangeCoder(cycle_time=0.1),
+    PulseAnimation([ORANGE, BLACK, YELLOW]), #ReverseOrangeCoder(cycle_time=0.05),
+    PulseAnimation([ORANGE, BLACK, YELLOW]), #ReverseOrangeCoder(cycle_time=0.05),
     
     Flash(), #12
 
@@ -54,15 +46,10 @@ animation = [
     Fill(color=GREEN), #14
     Fill(color=WHITE), #15
 
-    PulseAnimation([GREEN, DARKSLATEGRAY]), #16
+    PulseAnimation([GREEN, DARKSLATEGRAY]),
 
-    # green_matrix.Coder() #17
-    # linear_matrix.Coder(), #18
-    # ReverseOrangeCoder(cycle_time=0.1), #19
-    # LinearOrangeCoder(cycle_time=0.1) #20
-
-    Pointing() #17
-    # # Add way more animations here
+    #Pointing()
+    # Add way more animations here
 ]
 
 # List of PixelStrips
@@ -96,10 +83,9 @@ def receive_message():
 def main():
     global strip, led
     blink(3)
-    print("HELLO")
-    # strip[2].animation = animation[20]
     last_msg_time = 0.0
-    while True:
+    # strip[4].animation = animation[2]
+    while True:5
         for s in strip:
             s.draw()
         message = receive_message()
@@ -112,7 +98,6 @@ def main():
             elif strip_num < len(strip):
                 strip[strip_num].animation = None
             last_msg_time = current_time()
-            print(f"RECEIVE({strip_num}, {anim_num})\n")
         led.value = (current_time() < last_msg_time + 0.5)
 
 def blink(n, color=BLUE, sleep_time=0.4): 
