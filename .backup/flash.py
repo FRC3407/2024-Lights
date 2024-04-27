@@ -75,4 +75,4 @@ class Flash(pixelstrip.Animation):
 #     print("i am alive!")
 
 #     while True:
-#        
+#         matrix.draw()
