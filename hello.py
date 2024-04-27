@@ -26,7 +26,7 @@ if __name__ == "__main__":
     strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
     strip.timeout = 0.7
 
-    strip.animation = FillRed()
+    strip.animation = HelloWorld()
 
     while True:
         strip.draw()
